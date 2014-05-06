@@ -63,8 +63,17 @@ module.exports = function(grunt) {
 				src: ["test/index.html"],
 			},
 			options: {
-        run: true
-      }
+				run: true
+			}
+		},
+		copy: {
+			ghpages: {
+				expand: true,
+				flatten: true,
+				filter: "isFile",
+				src: ["dist/**"],
+				dest: "../gh-pages/app/js/"
+			}
 		},
 		watch: {
 			gruntfile: {
@@ -80,6 +89,7 @@ module.exports = function(grunt) {
 				tasks: ["jshint:lib_test", "mocha"]
 			}
 		}
+
 	});
 
 	// These plugins provide necessary tasks.
@@ -92,5 +102,22 @@ module.exports = function(grunt) {
 
 	// Default task.
 	grunt.registerTask("default", ["jshint", "mocha", "concat", "uglify"]);
+
+
+	grunt.registerTask("ghpages","Copy files to GitHub Pages directory", function(){
+		var dest = grunt.config.get("copy.ghpages.dest");
+
+		if (!grunt.file.exists(dest)) {
+			grunt.log.writeln("To copy dist files to gh-pages on build, checkout " +
+				"the \n\"gh-pages\" branch so that " + dest + "is writable.");
+			return true;
+		}
+
+		grunt.log.writeln("Copying distribution files to ", dest);
+
+		grunt.task.run("copy:ghpages");
+
+		return true;
+	});
 
 };
