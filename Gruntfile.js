@@ -12,7 +12,6 @@ module.exports = function(grunt) {
 		concat: {
 			dist: {
 				src: [
-					"lib/namespace.js",
 					"lib/amd.module.js",
 					"lib/<%= pkg.name %>.*.js",
 					"lib/<%= pkg.name %>.js"
@@ -23,7 +22,7 @@ module.exports = function(grunt) {
 		uglify: {
 			options: {
 				sourceMap: true,
-				wrap: "improc"
+				wrap: "improcjs"
 			},
 			dist: {
 				src: "<%= concat.dist.dest %>",
@@ -46,11 +45,11 @@ module.exports = function(grunt) {
 				noarg: true,
 				quotmark: "double",
 				undef: true,
-				unused: true,
+				//unused: true,
 				strict: true,
 				trailing: true,
 				smarttabs: true,
-				predef: ["improc", "assert"]
+				predef: ["improcjs", "improcjsGlobal", "assert"]
 			},
 			gruntfile: {
 				src: "Gruntfile.js"
