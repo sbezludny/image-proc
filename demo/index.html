@@ -2,18 +2,18 @@
 	<head>
 		<title>Image processing Demo</title>
 		<link href="css/demo.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="../dist/improc.min.js"></script>
+		<script src="../dist/improc.js"></script>
 	</head>
 	<body>
 
 		<h1>Image processing demo</h1>
 
 		<input type="file" id="image-loader">
-		<canvas id="image-canvas"></canvas>
+		<input id="gaussian-blur-sigma" type="range" min="0" max="30" value="0" step="0.1">
+		<br>
+		<canvas id="gaussian-blur"></canvas><br>
 
-		<script src="../dist/improc.js"></script>
-		<script>
-			new Improc();
-		</script>
+
+		<script src="js/app.js"></script>
 	</body>
 </html>

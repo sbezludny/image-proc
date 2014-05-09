@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 				strict: true,
 				trailing: true,
 				smarttabs: true,
-				predef: ["improcjs", "improcjsGlobal", "assert"]
+				predef: ["improcjs", "improcjsGlobal"]
 			},
 			gruntfile: {
 				src: "Gruntfile.js"
