@@ -138,23 +138,24 @@ if (typeof define !== 'undefined' && define.amd) {
 			return result;
 		};
 
-		var defaults = {
-			sigma: 0
-		};
+		/**
+		 * Process the filter on the specified image
+		 * @param  {[type]} Source image data
+		 * @param  {[type]} Image rectangle for processing by the filter
+		 * @param  {[type]} amount
+		 * @return {[type]}
+		 */
+		this.processFilter = function(sourceBytes, rect, amount) {
 
-		this.parameters = {
-			sigma: defaults.sigma
-		};
+			var sigma = amount;
 
-		this.processFilter = function(sourceBytes, rect) {
-
-			if (this.parameters.sigma === defaults.sigma) {
+			if (sigma === 0) {
 				return sourceBytes;
 			}
 
 			var sourceBitmap = toBitmap(sourceBytes, rect);
 
-			var kernel = getKernel(this.parameters.sigma);
+			var kernel = getKernel(sigma);
 
 			var destBitmap = processImage(sourceBitmap, kernel, rect);
 
@@ -164,10 +165,150 @@ if (typeof define !== 'undefined' && define.amd) {
 
 		};
 
-		this.reset = function() {
-			this.parameters = {
-				sigma: defaults.sigma
-			};
+	};
+})(improcjs);
+
+(function(improcjs) {
+	"use strict";
+
+	improcjs.MedianFilter = function() {
+
+		var processFilter = function(sourceBytes, rect, size) {
+
+			var w = rect.width,
+				h = rect.height,
+				x, y,
+				index,
+				rx, ry, t, r, g, b;
+			// processing square's radius
+			var radius = size >> 1;
+			// number of elements
+			var c = 0;
+
+			// array to hold pixel values (R, G, B)
+
+
+
+			var result = new Uint8ClampedArray(w * h * 4);
+
+			for (x = 0; x < w; x++) {
+				for (y = 0; y < h; y++) {
+					index = (y * w + x) * 4;
+					c = 0;
+					r = [];
+					g = [];
+					b = [];
+					for (rx = -radius; rx <= radius; rx++) {
+						t = x + rx;
+
+						if (t < 0) {
+							continue;
+						}
+
+						if (t > w) {
+							break;
+						}
+
+						for (ry = -radius; ry <= radius; ry++) {
+							t = y + ry;
+							if (t < 0) {
+								continue;
+							}
+
+							if (t < h) {
+
+								var ri = ((y + ry) * w + x + rx) * 4;
+								r[c] = sourceBytes[ri];
+								g[c] = sourceBytes[ri + 1];
+								b[c] = sourceBytes[ri + 2];
+								c++;
+							} else {
+								break;
+							}
+						}
+					}
+
+					t = c >> 1;
+
+
+
+					result[index] = r.sort()[t];
+					result[index + 1] = g.sort()[t];
+					result[index + 2] = b.sort()[t];
+					result[index + 3] = 255;
+
+				}
+			}
+
+
+
+			return result;
+		};
+
+		/**
+		 * Process the filter on the specified image
+		 * @param  {[type]} Source image data
+		 * @param  {[type]} Image rectangle for processing by the filter
+		 * @param  {[type]} amount
+		 * @return {[type]}
+		 */
+		this.processFilter = function(sourceBytes, rect, amount) {
+
+			var size = amount;
+
+			if (size === 0) {
+				return sourceBytes;
+			}
+
+
+
+			return processFilter(sourceBytes, rect, size);
+
+		};
+
+	};
+})(improcjs);
+
+(function(improcjs) {
+	"use strict";
+
+	improcjs.NoiseFilter = function() {
+
+		var getNoise = function(noiseValue) {
+			return Math.floor((noiseValue >> 1) - (Math.random() * noiseValue));
+		};
+
+		/**
+		 * Process the filter on the specified image
+		 * @param  {[type]} Source image data
+		 * @param  {[type]} Image rectangle for processing by the filter
+		 * @param  {[type]} amount
+		 * @return {[type]}
+		 */
+		this.processFilter = function(sourceBytes, rect, amount) {
+
+			if (amount === 0) {
+				return sourceBytes;
+			}
+
+			var w = rect.width,
+				h = rect.height,
+				x, y, index;
+
+			var result = new Uint8ClampedArray(w * h * 4);
+
+			for (x = 0; x < w; x++) {
+				for (y = 0; y < h; y++) {
+					index = (y * w + x) * 4;
+					result[index] = Math.max(0, Math.min(255, sourceBytes[index] + getNoise(amount)));
+					result[index + 1] = Math.max(0, Math.min(255, sourceBytes[index + 1] + getNoise(amount)));
+					result[index + 2] = Math.max(0, Math.min(255, sourceBytes[index + 2] + getNoise(amount)));
+					result[index + 3] = 255;
+				}
+			}
+
+			return result;
+
 		};
 
 	};
@@ -180,13 +321,11 @@ improcjs.Improc = function(canvas, filter) {
 	this.ctx = this.canvas.getContext("2d");
 	this.sourceImageData = null;
 
-	this.processImage = function (params) {
-		filter.parameters = params;
-
+	this.processImage = function (amount) {
 		var res = filter.processFilter(this.sourceImageData.data, {
 			width: canvas.width,
 			height: canvas.height
-		});
+		}, amount);
 
 		var imageData = this.ctx.createImageData(canvas.width, canvas.height);
 		imageData.data.set(res);
@@ -200,8 +339,6 @@ improcjs.Improc = function(canvas, filter) {
 
 		this.ctx.drawImage(img, 0, 0);
 		this.sourceImageData = this.ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-		filter.reset();
 	};
 };
 

@@ -15,7 +15,7 @@
 	};
 
 	beforeEach(function() {
-		filter = new improcjs.GaussianBlurFilter();
+		filter = new improcjs.MedianFitler();
 	});
 
 	describe("Guassian blur image filter", function() {
