@@ -139,7 +139,7 @@ if (typeof define !== 'undefined' && define.amd) {
 		};
 
 		var defaults = {
-			size: 0
+			sigma: 0
 		};
 
 		this.parameters = {
