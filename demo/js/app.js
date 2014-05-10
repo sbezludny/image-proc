@@ -3,8 +3,19 @@
 
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
+
+	var controls = {
+		amount: document.getElementById("amount"),
+		filter: document.getElementById("filter")
+	};
+
+
 	var imageData = null;
 	var proc = new Improcjs.Processor();
+
+	proc.addFilter("noise", "filters/noise.js");
+	proc.addFilter("median", "filters/median.js");
+	proc.addFilter("blur", "filters/blur.js");
 
 	var drawImage = function(data) {
 		var imageData = ctx.createImageData(canvas.width, canvas.height);
@@ -12,20 +23,20 @@
 		ctx.putImageData(imageData, 0, 0);
 	};
 
-	document
-		.getElementById("amount")
+	controls
+		.amount
 		.addEventListener("input", function(e) {
 
-			var amount = parseInt(document.getElementById("amount").value, 10);
+			var amount = parseInt(controls.amount.value, 10);
 
 			proc.processImage(
-				"noise",
+				controls.filter.value,
 				imageData.data, {
 					width: canvas.width,
 					height: canvas.height
 				},
 				amount,
-				function (data) {
+				function(data) {
 					drawImage(data);
 				});
 
@@ -33,27 +44,29 @@
 
 
 
-	document.getElementById("image-loader").addEventListener("change", function(e) {
+	document
+		.getElementById("image-loader")
+		.addEventListener("change", function(e) {
 
-		var file = e.target.files[0];
-		var fr = new FileReader();
+			var file = e.target.files[0];
+			var fr = new FileReader();
 
-		fr.onload = function(e) {
-			var dataURL = fr.result;
+			fr.onload = function(e) {
+				var dataURL = fr.result;
 
-			var img = new Image();
-			img.onload = function() {
-				canvas.width = img.width;
-				canvas.height = img.height;
+				var img = new Image();
+				img.onload = function() {
+					canvas.width = img.width;
+					canvas.height = img.height;
 
-				ctx.drawImage(img, 0, 0);
-				imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+					ctx.drawImage(img, 0, 0);
+					imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+				};
+				img.src = dataURL;
 			};
-			img.src = dataURL;
-		};
-		fr.readAsDataURL(file);
-	}, false);
+			fr.readAsDataURL(file);
+		}, false);
 
 
-	proc.addFilter("noise", "filters/noise.js");
+
 })();

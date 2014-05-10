@@ -6,7 +6,7 @@
 		var worker = null;
 		var filters = {};
 
-		this.processImage = function(filter, imageData, rect, amount, cb) {
+		this.processImage = function(filter, imageData, rect, amount,cb) {
 			var file = filters[filter].file;
 			if (worker !== null) {
 				worker.terminate();

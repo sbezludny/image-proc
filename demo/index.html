@@ -9,7 +9,12 @@
 		<h1>Image processing demo</h1>
 
 		<input type="file" id="image-loader">
-		<input id="amount" type="range" min="0" max="300" value="0" step="1">
+		<select id="filter">
+			<option value="noise">noise</option>
+			<option value="median">median</option>
+			<option value="blur">blur</option>
+		</select>
+		<input id="amount" type="range" min="0" max="10" value="0" step="1">
 		<canvas id="canvas"></canvas>
 
 		<script src="js/improc/improc.js"></script>
