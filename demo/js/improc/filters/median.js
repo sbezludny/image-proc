@@ -1,7 +1,7 @@
-(function(improcjs) {
+(function() {
 	"use strict";
 
-	improcjs.MedianFilter = function() {
+	this.MedianFilter = function() {
 
 		var median = function(values) {
 			values.sort(function(a, b) {
@@ -84,4 +84,4 @@
 		};
 
 	};
-})(improcjs);
+})();

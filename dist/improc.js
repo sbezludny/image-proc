@@ -11,7 +11,7 @@
 			if (worker !== null) {
 				worker.terminate();
 			}
-			worker = new Worker("js/improcjs/worker.js");
+			worker = new Worker("js/improc/worker.js");
 
 			worker.addEventListener("message", function(e) {
 				//

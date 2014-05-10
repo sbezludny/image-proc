@@ -19,5 +19,5 @@
 	"browser": true,
 
 	"globalstrict"  : true,
-	"predef": ["improcjs", "improcjsGlobal"]
+	"predef": ["Improcjs"]
 }

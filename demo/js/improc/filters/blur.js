@@ -1,7 +1,7 @@
-(function(improcjs) {
+(function() {
 	"use strict";
 
-	improcjs.GaussianBlurFilter = function() {
+	this.GaussianBlurFilter = function() {
 
 		var getKernel = function(sigma) {
 
@@ -140,4 +140,4 @@
 		};
 
 	};
-})(improcjs);
+})();

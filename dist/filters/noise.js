@@ -1,5 +1,5 @@
 /*global self*/
-(function() {
+(function(self) {
 	"use strict";
 
 	var getNoise = function(noiseValue) {
@@ -13,7 +13,7 @@
 	 * @param  {[type]} amount
 	 * @return {[type]}
 	 */
-	this.processFilter = function(bytes, rect, amount) {
+	self.processFilter = function(bytes, rect, amount) {
 
 		if (amount === 0) {
 			return;
@@ -35,13 +35,4 @@
 	};
 
 
-	/*self.addEventListener("message", function(e) {
-
-		var data = e.data;
-
-		processFilter(data.bytes, data.rect, data.amount);
-
-		self.postMessage(data.bytes, [data.bytes.buffer]);
-	});*/
-
-})();
+})(this);

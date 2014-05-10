@@ -14,7 +14,7 @@
 		return Array.prototype.slice.call(arrayLike, 0);
 	};
 
-	beforeEach(function() {
+	/*beforeEach(function() {
 		filter = new GaussianBlurFilter();
 	});
 
@@ -51,5 +51,5 @@
 			]);
 
 		});
-	});
+	});*/
 })();
