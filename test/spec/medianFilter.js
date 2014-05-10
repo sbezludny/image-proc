@@ -1,4 +1,4 @@
-/* global describe, assert, should, expect, it, beforeEach, sampleImage, improcjs */
+/* global describe, assert, should, expect, it, beforeEach, sampleImage, MedianFitler */
 
 (function() {
 	"use strict";
@@ -15,7 +15,7 @@
 	};
 
 	beforeEach(function() {
-		filter = new improcjs.MedianFitler();
+		filter = new MedianFitler();
 	});
 
 	describe("Guassian blur image filter", function() {

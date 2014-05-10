@@ -53,9 +53,6 @@
 					result[index] = median(r);
 					result[index + 1] = median(g);
 					result[index + 2] = median(b);
-					/*result[index] = median(r);
-					result[index + 1] = median(g);
-					result[index + 2] = median(b);*/
 
 				}
 			}

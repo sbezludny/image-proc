@@ -67,6 +67,19 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
+			dist: {
+				expand: true,
+				cwd: "../lib/",
+				filter: "isFile",
+				src: ["lib/**"],
+				dest: "dist/"
+			},
+			demo: {
+				expand: true,
+				filter: "isFile",
+				src: ["lib/**"],
+				dest: "demo/js/"
+			},
 			ghpages: {
 				expand: true,
 				flatten: true,
@@ -81,8 +94,8 @@ module.exports = function(grunt) {
 				tasks: ["jshint:gruntfile"]
 			},
 			js: {
-				files: ["<%= concat.dist.src %>"],
-				tasks: ["jshint", "concat", "uglify"]
+				files: ["lib/**/*.js"],
+				tasks: ["jshint", /*"concat", "uglify"*/, "copy:dist", "copy:demo"]
 			},
 			lib_test: {
 				files: "<%= jshint.lib_test.src %>",
@@ -101,10 +114,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-watch");
 
 	// Default task.
-	grunt.registerTask("default", ["jshint", "mocha", "concat", "uglify"]);
+	grunt.registerTask("default", ["jshint", "copy:dist", "mocha", /*"concat", "uglify"*/, "copy:demo"]);
 
 
-	grunt.registerTask("ghpages","Copy files to GitHub Pages directory", function(){
+	grunt.registerTask("ghpages", "Copy files to GitHub Pages directory", function() {
 		var dest = grunt.config.get("copy.ghpages.dest");
 
 		if (!grunt.file.exists(dest)) {
