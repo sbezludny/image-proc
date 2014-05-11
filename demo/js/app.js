@@ -9,6 +9,21 @@
 		filter: document.getElementById("filter")
 	};
 
+	var filterConfig = {
+		noise:{
+			min:0,
+			max:150
+		},
+		median:{
+			min:0,
+			max:10
+		},
+		blur:{
+			min:0,
+			max:20
+		}
+	};
+
 
 	var imageData = null;
 	var proc = new Improcjs.Processor();
@@ -23,8 +38,19 @@
 		ctx.putImageData(imageData, 0, 0);
 	};
 
-	controls
-		.amount
+	controls.filter.addEventListener("change", function (e) {
+
+		var conf = filterConfig[controls.filter.value];
+		controls.amount.setAttribute("min", conf.min);
+		controls.amount.setAttribute("max", conf.max);
+		controls.amount.value = conf.min;
+
+
+
+		drawImage(imageData.data);
+	});
+
+	controls.amount
 		.addEventListener("input", function(e) {
 
 			var amount = parseInt(controls.amount.value, 10);
@@ -44,8 +70,7 @@
 
 
 
-	document
-		.getElementById("image-loader")
+	document.getElementById("image-loader")
 		.addEventListener("change", function(e) {
 
 			var file = e.target.files[0];

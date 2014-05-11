@@ -15,13 +15,6 @@
 		}
 	};
 
-	/**
-	 * Process the filter on the specified image
-	 * @param  {[type]} Source image data
-	 * @param  {[type]} Image rectangle for processing by the filter
-	 * @param  {[type]} amount
-	 * @return {[type]}
-	 */
 	self.processFilter = function(bytes, rect, amount) {
 
 		if (amount === 0) {
@@ -47,7 +40,7 @@
 				for (ry = y - radius; ry <= y + radius; ry++) {
 					for (rx = x - radius; rx <= x + radius; rx++) {
 
-						var ri = (ry * w + rx) * 4;
+						var ri = (ry * w + rx) << 2;
 
 						r[c] = bytes[ri];
 						g[c] = bytes[ri + 1];
@@ -56,7 +49,7 @@
 					}
 				}
 
-				index = (y * w + x) * 4;
+				index = (y * w + x) << 2;
 				bytes[index] = median(r);
 				bytes[index + 1] = median(g);
 				bytes[index + 2] = median(b);
