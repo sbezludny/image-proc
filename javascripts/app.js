@@ -10,17 +10,17 @@
 	};
 
 	var filterConfig = {
-		noise:{
-			min:0,
-			max:150
+		noise: {
+			min: 0,
+			max: 150
 		},
-		median:{
-			min:0,
-			max:10
+		median: {
+			min: 0,
+			max: 10
 		},
-		blur:{
-			min:0,
-			max:20
+		blur: {
+			min: 0,
+			max: 20
 		}
 	};
 
@@ -38,9 +38,9 @@
 		ctx.putImageData(imageData, 0, 0);
 	};
 
-	controls.filter.addEventListener("change", function (e) {
+	controls.filter.addEventListener("change", function(e) {
 
-		var conf = filterConfig[controls.filter.value];
+		var conf = filterConfig[e.target.value];
 		controls.amount.setAttribute("min", conf.min);
 		controls.amount.setAttribute("max", conf.max);
 		controls.amount.value = conf.min;
@@ -51,7 +51,7 @@
 	controls.amount
 		.addEventListener("input", function(e) {
 
-			var amount = parseInt(controls.amount.value, 10);
+			var amount = parseInt(e.target.value, 10);
 
 			proc.processImage(
 				controls.filter.value,
@@ -67,14 +67,14 @@
 		});
 
 
-
+	
 	document.getElementById("image-loader")
 		.addEventListener("change", function(e) {
 
 			var file = e.target.files[0];
 			var fr = new FileReader();
 
-			fr.onload = function(e) {
+			fr.onload = function() {
 				var dataURL = fr.result;
 
 				var img = new Image();
@@ -84,6 +84,8 @@
 
 					ctx.drawImage(img, 0, 0);
 					imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+					controls.amount.value = controls.amount.getAttribute("min");
 				};
 				img.src = dataURL;
 			};
@@ -91,5 +93,17 @@
 		}, false);
 
 
+	var img = new Image();
+	img.crossOrigin = "Anonymous";
+	img.onload = function() {
+		canvas.width = img.width;
+		canvas.height = img.height;
+
+		ctx.drawImage(img, 0, 0);
+		imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+		controls.amount.value = controls.amount.getAttribute("min");
+	};
+	img.src = "http://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Mariya_Magdalena.jpg/199px-Mariya_Magdalena.jpg";
 
 })();

@@ -7,7 +7,9 @@
 		var args = e.data;
 
 		importScripts(args.script);
-		self.processFilter(args.bytes, args.rect, args.amount);
+
+		var filter = self.Improcjs[args.filter];
+		filter.processFilter(args.bytes, args.rect, args.amount);
 		self.postMessage(args.bytes, [args.bytes.buffer]);
 	});
 

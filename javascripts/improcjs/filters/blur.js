@@ -1,4 +1,4 @@
-(function(self) {
+(function(Improcjs) {
 	"use strict";
 
 	var getKernel = function(sigma) {
@@ -98,18 +98,17 @@
 		});
 	};
 
+	Improcjs.blur = {
+		processFilter: function(imageData, rect, amount) {
+			if (amount === 0) {
+				return;
+			}
+
+			var kernel = getKernel(amount);
+
+			processImage(imageData, kernel, rect);
 
 
-	self.processFilter = function(sourceBytes, rect, amount) {
-
-		if (amount === 0) {
-			return;
 		}
-
-		var kernel = getKernel(amount);
-
-		processImage(sourceBytes, kernel, rect);
-
-
 	};
-})(this);
+})(this.Improcjs || (this.Improcjs = {}));

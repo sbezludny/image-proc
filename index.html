@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Image-proc by sbezludny</title>
+    <title>Improcjs by sbezludny</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -25,15 +25,10 @@
       </header>
       <section>
         <h3>
-        <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-        <p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-        <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-        <h3>
-        <a name="demos" class="anchor" href="#demos"><span class="octicon octicon-link"></span></a>Demos</h3>
+        <a name="user-content-%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5" class="anchor" href="#%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5"><span class="octicon octicon-link"></span></a>Описание</h3>
+        <p>Система для изменения параметров изображения в браузере.
+        Задание отборочного этапа UA Web Challenge VI. </p>
+        <a name="demos" class="anchor" href="#demos"><span class="octicon octicon-link"></span></a>Демо</h3>
         <div>
           <input type="file" id="image-loader">
           <select id="filter">
@@ -45,14 +40,48 @@ $ git checkout gh-pages
           <canvas id="canvas"></canvas>
         </div>
         <h3>
-        <a name="docs" class="anchor" href="#docs"><span class="octicon octicon-link"></span></a>Docs</h3>
-        <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-        <h3>
-        <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-        <p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-        <h3>
-        <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-        <p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+        <a name="user-content-%D0%92%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8" class="anchor" href="#%D0%92%D0%BE%D0%B7%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D0%B8"><span class="octicon octicon-link"></span></a>Возможности</h3>
+        <ul>
+          <li>Загрузка изображений</li>
+          <li>Изменение параметров изображения в отдельном потоке.</li>
+          <li>Добавление фильтров</li>
+        </ul><h3>
+        <a name="user-content-%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC%D1%8B%D0%B5-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B" class="anchor" href="#%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D0%B5%D0%BC%D1%8B%D0%B5-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D1%8B"><span class="octicon octicon-link"></span></a>Поддерживаемые фильтры</h3>
+        <ul>
+          <li>Гауссово размытие</li>
+          <li>Медианный фильтр</li>
+          <li>Довавление шума</li>
+        </ul><h3>
+        <a name="user-content-%D0%94%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%BE%D0%B2" class="anchor" href="#%D0%94%D0%BE%D0%B1%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D1%84%D0%B8%D0%BB%D1%8C%D1%82%D1%80%D0%BE%D0%B2"><span class="octicon octicon-link"></span></a>Добавление фильтров</h3>
+        <p>Для добавление фильтра необходимо воспользоваться ф-цией </p>
+<pre><code>Processor.addFilter(filterName, scriptPath)
+</code></pre>
+        <ul>
+          <li>@param <em>{ String }</em> название фильтра</li>
+          <li>@param <em>{ String }</em> путь к скрипту</li>
+        </ul><h4>
+        <a name="user-content-%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80" class="anchor" href="#%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80"><span class="octicon octicon-link"></span></a>Пример:</h4>
+<pre><code>var proc = new Improcjs.Processor(cwd);
+proc.addFilter("blur", "filters/blur.js");
+</code></pre>
+        <p>Фильтр должен реализовывать следующий интерфейс:</p>
+<pre><code>Filter.processFilter(data, rect, amount)
+</code></pre>
+        <ul>
+          <li>@param <em>{ Uint8ClampedArray }</em> изображение</li>
+          <li>@param <em>{ Object }</em> ширина и высота</li>
+          <li>@param <em>{ Number }</em> интенсивность фильтра</li>
+        </ul><p>Фильтр должен быть оформлен в отдельный скрипт.
+        Объект должен добавляться к пространству имен Improcjs.</p>
+<pre><code>(function(Improcjs) {
+    Improcjs.{filterName} = {
+        processFilter: function(data, rect, amount) {
+            ...
+        }
+    };
+})(this.Improcjs || (this.Improcjs = {}));
+</code></pre>
+        
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/sbezludny">sbezludny</a></p>

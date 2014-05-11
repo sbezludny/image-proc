@@ -7,7 +7,7 @@
 		var filters = {};
 
 		this.processImage = function(filter, imageData, rect, amount, cb) {
-			var file = filters[filter].file;
+			var script = filters[filter].script;
 			if (worker !== null) {
 				worker.terminate();
 			}
@@ -20,7 +20,8 @@
 			var bytes = new Uint8ClampedArray(imageData);
 
 			var objData = {
-				script: file,
+				filter: filter,
+				script: script,
 				bytes: bytes,
 				rect: rect,
 				amount: amount
@@ -28,9 +29,9 @@
 			worker.postMessage(objData, [bytes.buffer]);
 		};
 
-		this.addFilter = function(name, file) {
+		this.addFilter = function(name, script) {
 			filters[name] = {
-				file: file
+				script: script
 			};
 		};
 	};
