@@ -74,19 +74,12 @@ module.exports = function(grunt) {
 				src: ["**"],
 				dest: "dist/"
 			},
-			demo: {
-				expand: true,
-				cwd:"lib/",
-				filter: "isFile",
-				src: ["**"],
-				dest: "demo/js/improc"
-			},
 			ghpages: {
 				expand: true,
-				flatten: true,
+				cwd:"dist/",
 				filter: "isFile",
-				src: ["dist/**"],
-				dest: "../gh-pages/app/js/"
+				src: ["**"],
+				dest: "../gh-pages/javascripts/improcjs/"
 			}
 		},
 		watch: {
@@ -96,7 +89,7 @@ module.exports = function(grunt) {
 			},
 			js: {
 				files: ["lib/**/*.js"],
-				tasks: ["jshint", /*"concat", "uglify",*/ "copy:dist", "copy:demo"]
+				tasks: ["jshint", /*"concat", "uglify",*/ "copy:dist"]
 			},
 			lib_test: {
 				files: "<%= jshint.lib_test.src %>",
@@ -115,7 +108,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks("grunt-contrib-watch");
 
 	// Default task.
-	grunt.registerTask("default", ["jshint", "copy:dist", "mocha", /*"concat", "uglify",*/ "copy:demo"]);
+	grunt.registerTask("default", ["jshint", "copy:dist", "mocha", /*"concat", "uglify",*/ "ghpages"]);
 
 
 	grunt.registerTask("ghpages", "Copy files to GitHub Pages directory", function() {
