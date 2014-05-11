@@ -16,7 +16,7 @@
 	};
 
 	Improcjs.median = {
-		processFilter: function(bytes, rect, amount) {
+		processFilter: function(data, rect, amount) {
 
 			if (amount === 0) {
 				return;
@@ -43,17 +43,17 @@
 
 							var ri = (ry * w + rx) << 2;
 
-							r[c] = bytes[ri];
-							g[c] = bytes[ri + 1];
-							b[c] = bytes[ri + 2];
+							r[c] = data[ri];
+							g[c] = data[ri + 1];
+							b[c] = data[ri + 2];
 							c++;
 						}
 					}
 
 					index = (y * w + x) << 2;
-					bytes[index] = median(r);
-					bytes[index + 1] = median(g);
-					bytes[index + 2] = median(b);
+					data[index] = median(r);
+					data[index + 1] = median(g);
+					data[index + 2] = median(b);
 
 				}
 			}

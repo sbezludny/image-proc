@@ -83,7 +83,7 @@
 			h = rect.height,
 			index, px;
 
-		var tempData = [];
+		var tempData = new Uint8ClampedArray(data);
 
 		//x-direction
 		forEachPx(data, w, h, function(x, y, index) {
@@ -99,15 +99,14 @@
 	};
 
 	Improcjs.blur = {
-		processFilter: function(sourceBytes, rect, amount) {
-
+		processFilter: function(imageData, rect, amount) {
 			if (amount === 0) {
 				return;
 			}
 
 			var kernel = getKernel(amount);
 
-			processImage(sourceBytes, kernel, rect);
+			processImage(imageData, kernel, rect);
 
 
 		}

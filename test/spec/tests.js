@@ -41,9 +41,9 @@
 			Improcjs.blur.processFilter(imageData, imageSize, amount);
 
 			expect(toArray(imageData)).to.have.members([
-				186, 186, 186, 255, 171, 171, 171, 255, 163, 163, 163, 255,
+				186, 186, 186, 255, 171, 171, 171, 255, 162, 162, 162, 255,
 				166, 166, 166, 255, 146, 146, 146, 255, 137, 137, 137, 255,
-				152, 152, 152, 255, 128, 128, 128, 255, 117, 117, 117, 255
+				153, 153, 153, 255, 129, 129, 129, 255, 117, 117, 117, 255
 			]);
 
 		});
@@ -123,9 +123,11 @@
 			Improcjs.noise.processFilter(imageData, imageSize, noiseValue);
 
 			for (var i = 0; i < imageData.length; i++) {
-				var delta = sampleImage[i] - imageData[i];
+				var delta = Math.abs(sampleImage[i] - imageData[i]);
 
-				expect(delta).to.be.at.most(5);
+				expect(delta).to.be.at.most(noiseValue);
+
+
 			}
 
 		});
