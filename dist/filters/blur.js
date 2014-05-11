@@ -1,4 +1,4 @@
-(function(self) {
+(function(Improcjs) {
 	"use strict";
 
 	var getKernel = function(sigma) {
@@ -83,7 +83,7 @@
 			h = rect.height,
 			index, px;
 
-		var tempData = new Uint8ClampedArray(data);
+		var tempData = [];
 
 		//x-direction
 		forEachPx(data, w, h, function(x, y, index) {
@@ -98,18 +98,18 @@
 		});
 	};
 
+	Improcjs.blur = {
+		processFilter: function(sourceBytes, rect, amount) {
+
+			if (amount === 0) {
+				return;
+			}
+
+			var kernel = getKernel(amount);
+
+			processImage(sourceBytes, kernel, rect);
 
 
-	self.processFilter = function(sourceBytes, rect, amount) {
-
-		if (amount === 0) {
-			return;
 		}
-
-		var kernel = getKernel(amount);
-
-		processImage(sourceBytes, kernel, rect);
-
-
 	};
-})(this);
+})(this.Improcjs || (this.Improcjs = {}));
